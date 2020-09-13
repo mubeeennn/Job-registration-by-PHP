@@ -75,15 +75,16 @@
 
 </html>
 <?php
+    include ('connection.php');
     if(isset($_POST['submit'])){
-        $fname=$_POST['firstName'];
-        $lname=$_POST['lastName'];
-        $email = $_POST['email'];
-        $phone= $_POST['phone'];
-        $password= $_POST['password'];
+        $fname=mysqli_real_escape_string($con,$_POST['firstName']);
+        $lname=mysqli_real_escape_string($con,$_POST['lastName']);
+        $email = mysqli_real_escape_string($con,$_POST['email']);
+        $phone= mysqli_real_escape_string($con,$_POST['phone']);
+        $password= mysqli_real_escape_string($con,$_POST['password']);
 
         $insertQuery= "insert into user (`firstName`, `lastName`, `email`, `phone`, `password`)
-        VALUES($fname,$lname,$email,$phone,$password)";
+        VALUES('$fname','$lname','$email','$phone','$password')";
 
         $query= mysqli_query($con,$insertQuery);
 
